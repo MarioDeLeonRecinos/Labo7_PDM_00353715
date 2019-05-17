@@ -10,24 +10,24 @@ import com.mario.myapplication.database.entities.GithubRepo
 @Database(entities = [GithubRepo::class], version = 1, exportSchema = false)
 public abstract class RoomDB : RoomDatabase() {
 
-    abstract fun repoDAO():GithubRepoDAO
+    abstract fun repoDAO(): GithubRepoDAO
 
     companion object {
         @Volatile
-        private var INSTANCE:RoomDB?=null
+        private var INSTANCE: RoomDB? = null
 
         fun getInstance(
-            context:Context
-        ):RoomDB{
+            context: Context
+        ): RoomDB {
             val tempInstance = INSTANCE
-            if (tempInstance!=null){
+            if (tempInstance != null) {
                 return tempInstance
             }
-            synchronized(this){
-                val instance=Room
-                    .databaseBuilder(context,RoomDB::class.java,"Repo_DB")
+            synchronized(this) {
+                val instance = Room
+                    .databaseBuilder(context, RoomDB::class.java, "Repo_DB")
                     .build()
-                INSTANCE=instance
+                INSTANCE = instance
                 return instance
             }
         }
